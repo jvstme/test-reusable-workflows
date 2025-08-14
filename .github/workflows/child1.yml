@@ -1,0 +1,25 @@
+name: Reusable Workflow
+
+on:
+  workflow_call:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Build and create an artifact
+      run: |
+        echo "Building project..."
+        echo "This is an artifact file" > artifact.txt
+        mkdir -p artifact
+        mv artifact.txt artifact/
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: my-artifact
+        path: artifact/
