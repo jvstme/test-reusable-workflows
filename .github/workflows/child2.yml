@@ -1,0 +1,21 @@
+name: Verifying Workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  download-artifact:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Download artifact from the reusable workflow
+      uses: actions/download-artifact@v5
+      with:
+        name: my-artifact
+        path: ./downloaded-artifact
+
+    - name: Verify artifact
+      run: |
+        ls ./downloaded-artifact
