@@ -15,7 +15,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Download artifact from the reusable workflow
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v5
       with:
         name: my-artifact
         path: ./downloaded-artifact
