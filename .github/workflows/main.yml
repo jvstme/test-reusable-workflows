@@ -1,0 +1,25 @@
+name: Calling Workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  call-reusable-workflow:
+    uses: ./.github/workflows/child1.yml
+
+  download-artifact:
+    runs-on: ubuntu-latest
+    needs: call-reusable-workflow
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Download artifact from the reusable workflow
+      uses: actions/download-artifact@v2
+      with:
+        name: my-artifact
+        path: ./downloaded-artifact
+
+    - name: Verify artifact
+      run: |
+        ls ./downloaded-artifact
